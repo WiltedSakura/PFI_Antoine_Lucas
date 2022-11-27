@@ -1,4 +1,5 @@
 const apiBaseURL = "http://localhost:5000/";
+const userBaseURL = "http://localhost:5000/accounts/";
 
 function HEAD(successCallBack, errorCallBack) {
     $.ajax({
@@ -26,7 +27,7 @@ function GET_ALL(successCallBack, errorCallBack, queryString = null) {
         error: function (jqXHR) { errorCallBack(jqXHR.status) }
     });
 }
-function POST(data, successCallBack, errorCallBack) {
+function PostImage(data, successCallBack, errorCallBack) {
     $.ajax({
         url: apiBaseURL,
         type: 'POST',
@@ -36,7 +37,7 @@ function POST(data, successCallBack, errorCallBack) {
         error: function (jqXHR) { errorCallBack(jqXHR.status) }
     });
 }
-function PUT(bookmark, successCallBack, errorCallBack) {
+function PutImage(bookmark, successCallBack, errorCallBack) {
     $.ajax({
         url: apiBaseURL + "/" + bookmark.Id,
         type: 'PUT',
@@ -46,11 +47,23 @@ function PUT(bookmark, successCallBack, errorCallBack) {
         error: function (jqXHR) { errorCallBack(jqXHR.status) }
     });
 }
-function DELETE(id, successCallBack, errorCallBack) {
+function DeleteImage(id, successCallBack, errorCallBack) {
     $.ajax({
         url: apiBaseURL + "/" + id,
         type: 'DELETE',
         success: () => { successCallBack() },
+        error: function (jqXHR) { errorCallBack(jqXHR.status) }
+    });
+}
+
+
+function PostUser(data, successCallBack, errorCallBack) {
+    $.ajax({
+        url: userBaseURL,
+        type: 'POST',
+        contentType: 'application/json',
+        data: JSON.stringify(data),
+        success: (data) => { successCallBack(data) },
         error: function (jqXHR) { errorCallBack(jqXHR.status) }
     });
 }
